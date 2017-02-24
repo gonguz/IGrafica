@@ -92,15 +92,19 @@ Triangulo::Triangulo(GLdouble r){
 
 void Triangulo::draw(){
 	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_NORMAL_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
+	glNormalPointer(GL_DOUBLE, 0, normales);
 	glEnableClientState(GL_COLOR_ARRAY);
 	glColorPointer(3, GL_DOUBLE, 0, colores);
+	
 
 	glLineWidth(2);
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glLineWidth(1);
 
 	glDisableClientState(GL_COLOR_ARRAY);
+	glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
