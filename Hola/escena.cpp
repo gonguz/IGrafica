@@ -85,26 +85,32 @@ Triangulo::Triangulo(GLdouble r){
 	normales[1].set(0, 0, 1);
 	normales[2].set(0, 0, 1);
 
-	colores[0].set(0, 200, 0);
-	colores[1].set(22, 123, 1);
-	colores[2].set(222, 1, 1);
+	colores[0].set(0, 0, 0);
+	colores[1].set(0, 0, 0);
+	colores[2].set(0, 0, 0);
 }
+void Triangulo::set( int numero, double x, double y, double z){
 
+	verticesTri[numero].set(x,y,z);
+}
 void Triangulo::draw(){
 	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_NORMAL_ARRAY);
+	//glEnableClientState(GL_NORMAL_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
-	glNormalPointer(GL_DOUBLE, 0, normales);
+	//glNormalPointer(GL_DOUBLE, 0, normales);
 	glEnableClientState(GL_COLOR_ARRAY);
-	glColorPointer(3, GL_DOUBLE, 0, colores);
+    glColorPointer(3, GL_DOUBLE, 0, colores);
 	
 
 	glLineWidth(2);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glLineWidth(1);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+	glLineWidth(1); 
+
+
 
 	glDisableClientState(GL_COLOR_ARRAY);
-	glDisableClientState(GL_NORMAL_ARRAY);
+	//glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
@@ -112,3 +118,7 @@ void Triangulo::draw(){
 
 
 
+piramideTri::piramideTri(GLdouble r, GLdouble h){
+	//Aqui rellenas el vector de tangulos en los cuales vas cambiando las coordenadas de una esquinaç
+	// La altura se debe meter tambien para ver donde colocamos la piramide
+}

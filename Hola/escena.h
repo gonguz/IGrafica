@@ -1,7 +1,9 @@
 //#pragma once
 #ifndef _H_escena_H_
 #define _H_escena_H_
-#include "tipos.h"
+#include "tipos.h" 
+#include <vector>
+using namespace std;
 
 //-------------------------------------------------------------------------
 class Ejes {
@@ -19,6 +21,8 @@ class Triangulo {
 public:
 	Triangulo(GLdouble r);
 	void draw();
+	void set(int numero, double x,double y, double z);
+
 	PVec3 verticesTri[3];
 	PVec3 normales[2];
 	PVec3 colores[3];
@@ -27,9 +31,11 @@ public:
 //usado en el triangulo
 
 class piramideTri {
+	vector<Triangulo> triangulos;
 public: 
 	piramideTri(GLdouble r, GLdouble h);
 	void draw();
+	
 };
 
 class Escena {
