@@ -19,8 +19,9 @@ Escena::~Escena(){
 
 void Escena::draw(){
   ejes.draw();
-
-  drawDiabolo();
+  tri.draw();
+ // triangulo.draw();
+  //drawDiabolo();
 }
 
 //-------------------------------------------------------------------------
@@ -140,25 +141,35 @@ void const piramideTri::draw() {
 void Escena::drawDiabolo(){
 	glRotated(90.0, 1.0, 0.0, 0.0);// de las tres ultimas cifras la que tenga un 1 es la que gira el angulo de los  grados que le pongas
 	glTranslated(0.0, 0.0,-altura());
-	piramide->draw();
+	piramide.draw();
 
 	glRotated(-180, 1.0, 0.0, 0.0);
 	glTranslated(0.0, 0.0, -2*altura());
-	piramide->draw();
+	piramide.draw();
 
 	glRotated(60.0f, 0.0, 0.0, 1.0);
-	piramide->draw();
+	piramide.draw();
 
 	glTranslated(0.0, 0.0, 2*altura());
 	glRotated(180, 1.0, 0.0, 0.0);
 	
-	piramide->draw();
+	piramide.draw();
 }
 
-void Escena::TriAnimado(double rot,double giro,double rgiro){
-	glRotated(10.0f, 0.0, 1.0, 0.0);
-	cout << "girooooo";
+triAnimado::triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio){
+	_rotaux = rotacion;
+	_giroaux= giroz;
+	_rad = radio;
 }
-void update(){
+
+void triAnimado::update(){
+	_rot += _rotaux;
+	_giro += _giroaux;
+}
+
+void const triAnimado::draw(){
+	glRotated(triAnimado::_rot, 0.0, 0.0, 1.0);
+	tri->draw();
+	glRotated(-triAnimado::_rot, 0.0, 0.0, 1.0);
 
 }

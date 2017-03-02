@@ -163,7 +163,7 @@ void key(unsigned char key, int x, int y){
 	  camera.setEZ();
 	  break;
   case 't':
-	  escena.TriAnimado(5,5,5);
+	  escena.tri.update();
 	  break;
 
   default:

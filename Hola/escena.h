@@ -38,19 +38,35 @@ public:
 	
 };
 
+class triAnimado{
+public:
+	triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio);
+	 void update();
+	 void const draw();
+private:
+	Triangulo*tri = new Triangulo(50);
+	GLdouble _rotaux;
+	GLdouble _giroaux;
+	GLdouble _rot = 0;
+	GLdouble _giro = 0;
+	GLdouble _rad;
+
+};
 class Escena {
 public:
-  Escena(): ejes(200) {};
+  Escena(): ejes(200) ,tri(10.0,10.0,200.0),triangulo(50),piramide(50.0,50.0){};
   ~Escena();
   void init();
   void draw();
   void drawDiabolo();
   int _alt = 100;
   int altura(){ return _alt; };
-  void TriAnimado(double rot,double giro,double rgiro);
+  
 public:
   Ejes ejes;
-  piramideTri* piramide = new piramideTri(50,_alt);
+  Triangulo triangulo;
+  triAnimado tri;// = new triAnimado(10, 10, 100);
+  piramideTri piramide;
 };
 
 
