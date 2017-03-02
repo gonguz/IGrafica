@@ -21,7 +21,7 @@ class Triangulo {
 public:
 	Triangulo(GLdouble r);
 	void draw();
-	void set(int numero, double x,double y, double z);
+	void set(int numero,double altura);
 
 	PVec3 verticesTri[3];
 	PVec3 normales[2];
@@ -31,22 +31,26 @@ public:
 //usado en el triangulo
 
 class piramideTri {
-	vector<Triangulo> triangulos;
+	vector<Triangulo*> triangulos;
 public: 
 	piramideTri(GLdouble r, GLdouble h);
-	void draw();
+	void const draw();
 	
 };
 
 class Escena {
 public:
-  Escena(): ejes(200), triangulo(100) {};
+  Escena(): ejes(200) {};
   ~Escena();
   void init();
   void draw();
+  void drawDiabolo();
+  int _alt = 100;
+  int altura(){ return _alt; };
+  void TriAnimado(double rot,double giro,double rgiro);
 public:
   Ejes ejes;
-  Triangulo triangulo;
+  piramideTri* piramide = new piramideTri(50,_alt);
 };
 
 

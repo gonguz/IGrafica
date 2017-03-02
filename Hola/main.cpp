@@ -162,6 +162,10 @@ void key(unsigned char key, int x, int y){
   case 'o':
 	  camera.setEZ();
 	  break;
+  case 't':
+	  escena.TriAnimado(5,5,5);
+	  break;
+
   default:
     need_redisplay = false;
     break;
