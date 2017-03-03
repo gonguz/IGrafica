@@ -53,6 +53,7 @@ private:
 	GLdouble _rad;
 
 };
+
 class Escena {
 public:
   Escena(): ejes(200) ,tri(20.0,2.0,220.0),triangulo(50),piramide(50.0,_alt){};

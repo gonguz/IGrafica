@@ -22,6 +22,18 @@ public:
   GLdouble x, y, z;
 };
 
+class CTEx2 {
+public: 
+	CTEx2(GLdouble s, GLdouble t);
+	~CTEx2();
+};
+
+class Color4 {
+public: 
+	Color4(GLdouble r, GLdouble g, GLdouble  b, GLdouble a);
+	~Color4();
+};
+
 //-------------------------------------------------------------------------
 
 class Camara {

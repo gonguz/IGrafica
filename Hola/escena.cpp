@@ -21,7 +21,7 @@ void Escena::draw(){
   ejes.draw();
   tri.draw();
 	//triangulo.draw();
-  //drawDiabolo();
+  drawDiabolo();
 }
 
 //-------------------------------------------------------------------------
