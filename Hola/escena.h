@@ -6,7 +6,7 @@
 using namespace std;
 
 //-------------------------------------------------------------------------
-class Ejes {
+class Ejes { 
 public:
   Ejes(GLdouble l);
   ~Ejes(){};
@@ -43,6 +43,7 @@ public:
 	triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio);
 	 void update();
 	 void const draw();
+	 GLdouble const getRadio(){ return _rad; }
 private:
 	Triangulo*tri = new Triangulo(50);
 	GLdouble _rotaux;
@@ -54,7 +55,7 @@ private:
 };
 class Escena {
 public:
-  Escena(): ejes(200) ,tri(10.0,10.0,200.0),triangulo(50),piramide(50.0,50.0){};
+  Escena(): ejes(200) ,tri(20.0,2.0,220.0),triangulo(50),piramide(50.0,_alt){};
   ~Escena();
   void init();
   void draw();

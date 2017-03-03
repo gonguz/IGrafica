@@ -20,7 +20,7 @@ Escena::~Escena(){
 void Escena::draw(){
   ejes.draw();
   tri.draw();
- // triangulo.draw();
+	//triangulo.draw();
   //drawDiabolo();
 }
 
@@ -96,6 +96,7 @@ void Triangulo::set( int numero, double altura){
 
 	verticesTri[numero]= { 0, 0, altura };
 }
+
 void Triangulo::draw(){
 	glEnableClientState(GL_VERTEX_ARRAY);
 	//glEnableClientState(GL_NORMAL_ARRAY);
@@ -107,7 +108,7 @@ void Triangulo::draw(){
 
 	glLineWidth(2);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
 	glLineWidth(1); 
 
 
@@ -168,8 +169,12 @@ void triAnimado::update(){
 }
 
 void const triAnimado::draw(){
+	GLdouble radio = getRadio();
+	GLdouble x = radio * cos(_giro / 6.28);
+	GLdouble y = radio * sin(_giro / 6.28);
+	glTranslated(x, y, 0);
 	glRotated(triAnimado::_rot, 0.0, 0.0, 1.0);
 	tri->draw();
 	glRotated(-triAnimado::_rot, 0.0, 0.0, 1.0);
-
+	glTranslated(-x, -y, 0);
 }
