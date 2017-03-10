@@ -23,7 +23,7 @@ public:
 	void draw();
 	void set(int numero,double altura);
 
-	PVec3 verticesTri[3];
+	PVec3 verticesTri[3]; 
 	PVec3 normales[2];
 	PVec3 colores[3];
 };

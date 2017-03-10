@@ -77,6 +77,7 @@ void Ejes::draw(){
 }
 
 Triangulo::Triangulo(GLdouble r){
+
 	GLdouble x = r*cos(6.28 / 3);
 	GLdouble y = r *sin(6.28 / 3);
 

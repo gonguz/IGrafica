@@ -24,14 +24,19 @@ public:
 
 class CTEx2 {
 public: 
-	CTEx2(GLdouble s, GLdouble t);
+	CTEx2(GLdouble coorS, GLdouble coorT) : s(coorS), t(coorT){};
 	~CTEx2();
+public: 
+	GLdouble s, t;
 };
 
 class Color4 {
 public: 
-	Color4(GLdouble r, GLdouble g, GLdouble  b, GLdouble a);
+	Color4(GLdouble r, GLdouble g, GLdouble  b, GLdouble a) : red(r), green(g), blue(b), alpha(a){}
+	;
 	~Color4();
+public: 
+	GLdouble red, green, blue, alpha;
 };
 
 //-------------------------------------------------------------------------
