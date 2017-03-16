@@ -2,9 +2,10 @@
 #ifndef _H_escena_H_
 #define _H_escena_H_
 #include "tipos.h" 
+#include "Textura.h"
 #include <vector>
 using namespace std;
-
+class CTex2;
 //-------------------------------------------------------------------------
 class Ejes { 
 public:
@@ -54,6 +55,19 @@ private:
 
 };
 
+class Rectangulo{
+public:
+	Rectangulo(GLdouble h, GLdouble w);
+	void draw();
+	void set(GLdouble ancho, GLdouble alto);
+
+private:
+	PVec3 verticesRect[4];
+	CTEx2 coordTextura[4];
+	Color4 color;
+	PVec3 normal;
+};
+
 class Escena {
 public:
   Escena(): ejes(200) ,tri(20.0,2.0,220.0),triangulo(50),piramide(50.0,_alt){};
@@ -69,6 +83,8 @@ public:
   Triangulo triangulo;
   triAnimado tri;// = new triAnimado(10, 10, 100);
   piramideTri piramide;
+  Rectangulo *rectangulo = new Rectangulo(800, 600);
+  Textura* textura = new Textura();
 };
 
 

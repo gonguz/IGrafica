@@ -1,12 +1,15 @@
 #include "escena.h"
 #include <GL/freeglut.h>
 #include <iostream>
+#include "tipos.h" //Puede estar mal
 using namespace std;
 //-------------------------------------------------------------------------
 
 void Escena::init(){
   // texturas
   // luces
+	textura->load("../bmps/Zelda.bmp");
+
 }
 
 //-------------------------------------------------------------------------
@@ -18,10 +21,12 @@ Escena::~Escena(){
 //-------------------------------------------------------------------------
 
 void Escena::draw(){
-  ejes.draw();
-  tri.draw();
+  //ejes.draw();
+  //tri.draw();
 	//triangulo.draw();
-  drawDiabolo();
+  //drawDiabolo();
+	rectangulo->draw();
+
 }
 
 //-------------------------------------------------------------------------
@@ -139,6 +144,53 @@ void const piramideTri::draw() {
 	for (int i = 2; i >= 0; i--) {
 		triangulos[i]->draw();
 	}
+}
+
+Rectangulo::Rectangulo(GLdouble h, GLdouble w){
+
+	verticesRect[0].set(0, 0, 0);
+	verticesRect[1].set(w, 0, 0);
+	verticesRect[2].set(w, h, 0);
+	verticesRect[3].set(0, h, 0);
+
+	coordTextura[0].s = 0; coordTextura[0].t = 1;
+	coordTextura[1].s = 0; coordTextura[1].t = 0;
+	coordTextura[2].s = 1; coordTextura[2].t = 1;
+	coordTextura[3].s = 1; coordTextura[3].t = 0;
+
+
+	normal.set(0, 0, 1);
+
+}
+
+void Rectangulo::draw(){
+	glEnableClientState(GL_VERTEX_ARRAY);
+	//glEnableClientState(GL_NORMAL_ARRAY);
+	glVertexPointer(3, GL_DOUBLE, 0, verticesRect);
+	glNormal3d(normal.x, normal.y, normal.z);
+
+	
+	glColor4d(color.red, color.green, color.blue, color.alpha);
+
+
+	glLineWidth(2);
+
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+	glLineWidth(1);
+
+
+
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_TEXTURE_2D);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
+}
+
+void Rectangulo::set(GLdouble ancho, GLdouble alto){
+	verticesRect[0].set(0, 0, 0);
+	verticesRect[1].set(ancho, 0, 0);
+	verticesRect[2].set(ancho, alto, 0);
+	verticesRect[3].set(0, alto, 0);
 }
 void Escena::drawDiabolo(){
 	glRotated(90.0, 1.0, 0.0, 0.0);// de las tres ultimas cifras la que tenga un 1 es la que gira el angulo de los  grados que le pongas

@@ -25,7 +25,8 @@ public:
 class CTEx2 {
 public: 
 	CTEx2(GLdouble coorS, GLdouble coorT) : s(coorS), t(coorT){};
-	~CTEx2();
+	CTEx2() : s(0), t(0){};
+	~CTEx2(){  };
 public: 
 	GLdouble s, t;
 };
@@ -34,7 +35,8 @@ class Color4 {
 public: 
 	Color4(GLdouble r, GLdouble g, GLdouble  b, GLdouble a) : red(r), green(g), blue(b), alpha(a){}
 	;
-	~Color4();
+	Color4() : red(0), green(0), blue(0), alpha(0){};
+	~Color4(){};
 public: 
 	GLdouble red, green, blue, alpha;
 };
