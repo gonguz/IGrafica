@@ -1,5 +1,17 @@
-﻿Build started 16/03/2017 18:47:43.
+﻿Compilación iniciada a las 17/03/2017 11:59:06.
+     1>Proyecto "E:\ig\IGrafica\Hola\Hola.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         E:\Archivos de programa (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt escena.cpp
+         escena.cpp
+       Link:
+         E:\Archivos de programa (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"E:\ig\IGrafica\bin\HolaDebug.exe" /INCREMENTAL /NOLOGO freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"E:\ig\IGrafica\bin\HolaDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"E:\ig\IGrafica\bin\HolaDebug.lib" /MACHINE:X86 Debug\escena.obj
+         Debug\main.obj
+         Debug\PixMap24RGB.obj
+         Debug\Textura.obj
+         Debug\tipos.obj
+         Hola.vcxproj -> E:\ig\IGrafica\bin\HolaDebug.exe
+     1>Compilación del proyecto terminada "E:\ig\IGrafica\Hola\Hola.vcxproj" (Build destinos).
 
-Build succeeded.
+Compilación correcta.
 
-Time Elapsed 00:00:00.01
+Tiempo transcurrido 00:00:00.69

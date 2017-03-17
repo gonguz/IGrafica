@@ -8,6 +8,8 @@ using namespace std;
 void Escena::init(){
   // texturas
   // luces
+	
+	textura->init();
 	textura->load("../bmps/Zelda.bmp");
 
 }
@@ -21,10 +23,10 @@ Escena::~Escena(){
 //-------------------------------------------------------------------------
 
 void Escena::draw(){
-  //ejes.draw();
+  ejes.draw();
   //tri.draw();
 	//triangulo.draw();
-  //drawDiabolo();
+  drawDiabolo();
 	rectangulo->draw();
 
 }
@@ -90,20 +92,24 @@ Triangulo::Triangulo(GLdouble r){
 	verticesTri[1].set(x, y, 0);
 	verticesTri[2].set(x, -y, 0);
 
-//	normales[0].set(0, 0, 1);
-//	normales[1].set(0, 0, 1);
-//	normales[2].set(0, 0, 1);
+	normales[0].set(0, 0, 1);
+	normales[1].set(0, 0, 1);
+	normales[2].set(0, 0, 1);
+	coordTextura[0].s = 0; coordTextura[0].t = 1;
+	coordTextura[1].s = 0; coordTextura[1].t = 0;
+	coordTextura[2].s = 1; coordTextura[2].t = 1;
+	coordTextura[3].s = 1; coordTextura[3].t = 0;
 
-	colores[0].set(0, 0, 0);
-	colores[1].set(0, 0, 0);
-	colores[2].set(0, 0, 0);
+	colores[0] = { 0, 0, 0, 1 };
+	colores[1] = { 0, 0, 0, 1 };
+	colores[2] = { 0, 0, 0, 1 };
 }
 void Triangulo::set( int numero, double altura){
 
 	verticesTri[numero]= { 0, 0, altura };
 }
 
-void Triangulo::draw(){
+void Triangulo::draw(){/*
 	glEnableClientState(GL_VERTEX_ARRAY);
 	//glEnableClientState(GL_NORMAL_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
@@ -121,6 +127,29 @@ void Triangulo::draw(){
 
 	glDisableClientState(GL_COLOR_ARRAY);
 	//glDisableClientState(GL_NORMAL_ARRAY);
+	glDisableClientState(GL_VERTEX_ARRAY);
+	*/
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_TEXTURE_2D);
+	glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
+	glNormal3d(normales[0].x, normales[0].y, normales[0].z);
+
+
+	glColor4d(colores[0].red, colores[0].green, colores[0].blue, colores[0].alpha);
+
+
+	//glLineWidth(2);
+	glTexCoordPointer(2, GL_DOUBLE, 0, coordTextura);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+	//	glLineWidth(1);
+
+
+
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_TEXTURE_2D);
+
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
 
@@ -148,10 +177,14 @@ void const piramideTri::draw() {
 
 Rectangulo::Rectangulo(GLdouble h, GLdouble w){
 
-	verticesRect[0].set(0, 0, 0);
-	verticesRect[1].set(w, 0, 0);
+	verticesRect[0].set(0, h, 0);
+	verticesRect[1].set(0, 0, 0);
 	verticesRect[2].set(w, h, 0);
-	verticesRect[3].set(0, h, 0);
+	
+	verticesRect[3].set(w, 0, 0);
+	
+	
+	
 
 	coordTextura[0].s = 0; coordTextura[0].t = 1;
 	coordTextura[1].s = 0; coordTextura[1].t = 0;
@@ -165,7 +198,8 @@ Rectangulo::Rectangulo(GLdouble h, GLdouble w){
 
 void Rectangulo::draw(){
 	glEnableClientState(GL_VERTEX_ARRAY);
-	//glEnableClientState(GL_NORMAL_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnableClientState(GL_TEXTURE_2D);
 	glVertexPointer(3, GL_DOUBLE, 0, verticesRect);
 	glNormal3d(normal.x, normal.y, normal.z);
 
@@ -173,10 +207,11 @@ void Rectangulo::draw(){
 	glColor4d(color.red, color.green, color.blue, color.alpha);
 
 
-	glLineWidth(2);
-
+	//glLineWidth(2);
+	glTexCoordPointer(2, GL_DOUBLE, 0, coordTextura);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-	glLineWidth(1);
+//	glLineWidth(1);
 
 
 
@@ -187,10 +222,10 @@ void Rectangulo::draw(){
 }
 
 void Rectangulo::set(GLdouble ancho, GLdouble alto){
-	verticesRect[0].set(0, 0, 0);
-	verticesRect[1].set(ancho, 0, 0);
+	verticesRect[0].set(0,alto, 0);
+	verticesRect[1].set(0, 0, 0);
 	verticesRect[2].set(ancho, alto, 0);
-	verticesRect[3].set(0, alto, 0);
+	verticesRect[3].set(0, 0, 0);
 }
 void Escena::drawDiabolo(){
 	glRotated(90.0, 1.0, 0.0, 0.0);// de las tres ultimas cifras la que tenga un 1 es la que gira el angulo de los  grados que le pongas
@@ -208,6 +243,14 @@ void Escena::drawDiabolo(){
 	glRotated(180, 1.0, 0.0, 0.0);
 	
 	piramide.draw();
+	//Para que vuelva a la posicion original
+
+	glRotated(-180, 1.0, 0.0, 0.0);
+	glRotated(-60.0f, 0.0, 0.0, 1.0);
+	glRotated(180, 1.0, 0.0, 0.0);
+	
+	glRotated(-90.0, 1.0, 0.0, 0.0);
+	glTranslated(0.0, 0.0, altura());
 }
 
 triAnimado::triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio){

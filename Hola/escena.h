@@ -26,7 +26,8 @@ public:
 
 	PVec3 verticesTri[3]; 
 	PVec3 normales[2];
-	PVec3 colores[3];
+	Color4 colores[3];
+	CTEx2 coordTextura[4];
 };
 //piramide variable auxiliar triangulo parametro radio y altura, tiene tres caras el vertice donde confluyen es el 0,0,altura, nos valemos de los vertices(noramles) que hemos
 //usado en el triangulo
@@ -83,7 +84,7 @@ public:
   Triangulo triangulo;
   triAnimado tri;// = new triAnimado(10, 10, 100);
   piramideTri piramide;
-  Rectangulo *rectangulo = new Rectangulo(800, 600);
+  Rectangulo *rectangulo = new Rectangulo(200, 300);
   Textura* textura = new Textura();
 };
 
