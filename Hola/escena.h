@@ -76,6 +76,7 @@ public:
   void init();
   void draw();
   void drawDiabolo();
+
   int _alt = 100;
   int altura(){ return _alt; };
   
@@ -84,7 +85,7 @@ public:
   Triangulo triangulo;
   triAnimado tri;// = new triAnimado(10, 10, 100);
   piramideTri piramide;
-  Rectangulo *rectangulo = new Rectangulo(200, 300);
+  Rectangulo *rectangulo = new Rectangulo(600, 800);
   Textura* textura = new Textura();
 };
 

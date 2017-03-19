@@ -26,8 +26,10 @@ void Escena::draw(){
   ejes.draw();
   //tri.draw();
 	//triangulo.draw();
+  
+  rectangulo->draw();
   drawDiabolo();
-	rectangulo->draw();
+ 
 
 }
 
@@ -177,11 +179,11 @@ void const piramideTri::draw() {
 
 Rectangulo::Rectangulo(GLdouble h, GLdouble w){
 
-	verticesRect[0].set(0, h, 0);
-	verticesRect[1].set(0, 0, 0);
-	verticesRect[2].set(w, h, 0);
+	verticesRect[0].set(-w/2, h/2, 0);
+	verticesRect[1].set(-w/2, -h/2, 0);
+	verticesRect[2].set(w/2, h/2, 0);
 	
-	verticesRect[3].set(w, 0, 0);
+	verticesRect[3].set(w/2, -h/2, 0);
 	
 	
 	
@@ -222,24 +224,24 @@ void Rectangulo::draw(){
 }
 
 void Rectangulo::set(GLdouble ancho, GLdouble alto){
-	verticesRect[0].set(0,alto, 0);
-	verticesRect[1].set(0, 0, 0);
-	verticesRect[2].set(ancho, alto, 0);
-	verticesRect[3].set(0, 0, 0);
+	verticesRect[0].set(-ancho/2,alto/2, 0);
+	verticesRect[1].set(-ancho/2, -alto/2, 0);
+	verticesRect[2].set(ancho/2, alto/2, 0);
+	verticesRect[3].set(-ancho/2, -alto/2, 0);
 }
 void Escena::drawDiabolo(){
-	glRotated(90.0, 1.0, 0.0, 0.0);// de las tres ultimas cifras la que tenga un 1 es la que gira el angulo de los  grados que le pongas
+	/*glRotated(90.0, 1.0, 0.0, 0.0);// de las tres ultimas cifras la que tenga un 1 es la que gira el angulo de los  grados que le pongas
 	glTranslated(0.0, 0.0,-altura());
 	piramide.draw();
 
 	glRotated(-180, 1.0, 0.0, 0.0);
-	glTranslated(0.0, 0.0, -2*altura());
+	//glTranslated(0.0, 0.0, -2*altura());
 	piramide.draw();
 
 	glRotated(60.0f, 0.0, 0.0, 1.0);
 	piramide.draw();
 
-	glTranslated(0.0, 0.0, 2*altura());
+	//glTranslated(0.0, 0.0, 2*altura());
 	glRotated(180, 1.0, 0.0, 0.0);
 	
 	piramide.draw();
@@ -250,7 +252,25 @@ void Escena::drawDiabolo(){
 	glRotated(180, 1.0, 0.0, 0.0);
 	
 	glRotated(-90.0, 1.0, 0.0, 0.0);
-	glTranslated(0.0, 0.0, altura());
+	*/
+	glTranslated(0.0,altura(),0.0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	piramide.draw();
+	glRotated(60.0f, 0.0, 0.0, 1.0);
+	piramide.draw();
+	glRotated(-180, 1.0, 0.0, 0.0);
+	glTranslated(0.0, 0.0, - 2*altura());
+	piramide.draw();
+	glRotated(-60, 0.0, 0.0, 1.0);
+	piramide.draw();
+	
+	glRotated(60, 0.0, 0.0, 1.0);
+	glTranslated(0.0, 0.0, 2 * altura());
+	glRotated(180, 1.0, 0.0, 0.0);
+	glRotated(-60.0f, 0.0, 0.0, 1.0);
+	glRotated(-90.0, 1.0, 0.0, 0.0);
+	glTranslated(0.0, -altura(), 0.0);
+	
 }
 
 triAnimado::triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio){
