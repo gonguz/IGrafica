@@ -4,11 +4,12 @@
 #include "tipos.h" //Puede estar mal
 using namespace std;
 //-------------------------------------------------------------------------
-
+Estados estado;
 void Escena::init(){
   // texturas
   // luces
-	
+	estado = Estados::Recortar;
+	glDisable(GL_DEPTH_TEST);
 	textura->init();
 	textura->load("../bmps/Zelda.bmp");
 
@@ -28,7 +29,8 @@ void Escena::draw(){
 	//triangulo.draw();
   
   rectangulo->draw();
-  drawDiabolo();
+  triangulo.draw();
+  //drawDiabolo();
  
 
 }
@@ -110,6 +112,27 @@ void Triangulo::set( int numero, double altura){
 
 	verticesTri[numero]= { 0, 0, altura };
 }
+bool Triangulo::dentro(GLdouble w, GLdouble h){
+	/*/SI(Ax - Px) * (By - Py) –(Ay - Py) * (Bx - Px) < 0
+		->P está fuera
+		SI(Bx - Px) * (Cy - Py) –(By - Py) * (Cx - Px) < 0
+		->P está fuera
+		SI(Cx - Px) * (Ay - Py) –(Cy - Py) * (Ax - Px) < 0
+		->P está fuera
+		En otro caso->P está dentro*/
+		if (((verticesTri[0].x - w) * (verticesTri[1].y - h)) - ((verticesTri[0].y - h) * (verticesTri[1].x - w)) < 0){
+			return false;
+		}
+
+		else if (((verticesTri[1].x - w) * (verticesTri[2].y - h)) - ((verticesTri[1].y - h) * (verticesTri[2].x - w)) < 0){
+			return false;
+		}
+
+		else if (((verticesTri[2].x - w) * (verticesTri[0].y - h)) - ((verticesTri[2].y - h) * (verticesTri[0].x - w)) < 0){
+			return false;
+		}
+		else return true;
+}
 
 void Triangulo::draw(){/*
 	glEnableClientState(GL_VERTEX_ARRAY);
@@ -130,29 +153,51 @@ void Triangulo::draw(){/*
 	glDisableClientState(GL_COLOR_ARRAY);
 	//glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
-	*/
-	glEnableClientState(GL_VERTEX_ARRAY);
-	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnableClientState(GL_TEXTURE_2D);
-	glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
-	glNormal3d(normales[0].x, normales[0].y, normales[0].z);
+	*/if (estado == Estados::Recortar){
+		glEnableClientState(GL_VERTEX_ARRAY);
+		//glEnableClientState(GL_NORMAL_ARRAY);
+		glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
+		//glNormalPointer(GL_DOUBLE, 0, normales);
+		glEnableClientState(GL_COLOR_ARRAY);
+		glColorPointer(3, GL_DOUBLE, 0, colores);
 
 
-	glColor4d(colores[0].red, colores[0].green, colores[0].blue, colores[0].alpha);
-
-
-	//glLineWidth(2);
-	glTexCoordPointer(2, GL_DOUBLE, 0, coordTextura);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
-	glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
-	//	glLineWidth(1);
+		glLineWidth(2);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glDrawArrays(GL_TRIANGLES, 0, 3);
+		glLineWidth(1);
 
 
 
-	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_TEXTURE_2D);
+		glDisableClientState(GL_COLOR_ARRAY);
+		//glDisableClientState(GL_NORMAL_ARRAY);
+		glDisableClientState(GL_VERTEX_ARRAY);
+	}
+	else {
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+		glEnableClientState(GL_TEXTURE_2D);
+		glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
+		glNormal3d(normales[0].x, normales[0].y, normales[0].z);
 
-	glDisableClientState(GL_VERTEX_ARRAY);
+
+		glColor4d(colores[0].red, colores[0].green, colores[0].blue, colores[0].alpha);
+
+
+		//glLineWidth(2);
+		glTexCoordPointer(2, GL_DOUBLE, 0, coordTextura);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
+		//	glLineWidth(1);
+
+
+
+		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+		glDisableClientState(GL_TEXTURE_2D);
+
+		glDisableClientState(GL_VERTEX_ARRAY);
+	}
+	
 }
 
 //-------------------------------------------------------------------------

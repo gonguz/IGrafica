@@ -32,6 +32,7 @@ void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
 void mouse(int button, int state, int x, int y);
+void motion(int x, int y);
 
 //-------------------------------------------------------------------------
 
@@ -95,6 +96,7 @@ int main(int argc, char *argv[]){
   glutSpecialFunc(specialKey);
   glutDisplayFunc(display);
   glutMouseFunc(mouse);
+  glutMotionFunc(motion);
 
   // OpenGL basic setting
   intitGL();
@@ -225,4 +227,11 @@ void mouse(int button, int state, int x, int y){
 }
 
 //-------------------------------------------------------------------------
-
+void motion(int x, int y){
+	x = x - winWidth / 2;
+	y = y + winHeight / 2;
+	if (escena.triangulo.dentro(x,y))
+	{
+		glutPostRedisplay();
+	}
+}

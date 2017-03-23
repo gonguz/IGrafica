@@ -4,6 +4,7 @@
 #include "tipos.h" 
 #include "Textura.h"
 #include <vector>
+enum class Estados{ Collage, Recortar, Animar, Diabolo }; 
 using namespace std;
 class CTex2;
 //-------------------------------------------------------------------------
@@ -23,7 +24,7 @@ public:
 	Triangulo(GLdouble r);
 	void draw();
 	void set(int numero,double altura);
-
+	bool dentro(GLdouble w, GLdouble h);
 	PVec3 verticesTri[3]; 
 	PVec3 normales[2];
 	Color4 colores[3];
@@ -81,6 +82,7 @@ public:
   int altura(){ return _alt; };
   
 public:
+	
   Ejes ejes;
   Triangulo triangulo;
   triAnimado tri;// = new triAnimado(10, 10, 100);
