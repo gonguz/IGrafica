@@ -25,10 +25,17 @@ public:
 	void draw();
 	void set(int numero,double altura);
 	bool dentro(GLdouble w, GLdouble h);
+	void posicionar(GLdouble x, GLdouble y);
+	void rotar();
 	PVec3 verticesTri[3]; 
 	PVec3 normales[2];
 	Color4 colores[3];
 	CTEx2 coordTextura[4];
+	GLdouble angulo = 0;
+	GLdouble _rotar = 10;
+	PVec3 centro = { 0, 0, 0 };
+	GLdouble radio;
+
 };
 //piramide variable auxiliar triangulo parametro radio y altura, tiene tres caras el vertice donde confluyen es el 0,0,altura, nos valemos de los vertices(noramles) que hemos
 //usado en el triangulo

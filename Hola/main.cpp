@@ -229,9 +229,10 @@ void mouse(int button, int state, int x, int y){
 //-------------------------------------------------------------------------
 void motion(int x, int y){
 	x = x - winWidth / 2;
-	y = y + winHeight / 2;
+	y = -y + winHeight / 2;
 	if (escena.triangulo.dentro(x,y))
 	{
+		escena.triangulo.posicionar(x, y);
 		glutPostRedisplay();
 	}
 }

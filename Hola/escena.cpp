@@ -9,7 +9,7 @@ void Escena::init(){
   // texturas
   // luces
 	estado = Estados::Recortar;
-	glDisable(GL_DEPTH_TEST);
+	
 	textura->init();
 	textura->load("../bmps/Zelda.bmp");
 
@@ -24,13 +24,15 @@ Escena::~Escena(){
 //-------------------------------------------------------------------------
 
 void Escena::draw(){
-  ejes.draw();
+	
+  //  ejes.draw();
   //tri.draw();
 	//triangulo.draw();
-  
+	glDisable(GL_DEPTH_TEST);
   rectangulo->draw();
   triangulo.draw();
-  //drawDiabolo();
+  glEnable(GL_DEPTH_TEST);
+ // drawDiabolo();
  
 
 }
@@ -88,7 +90,7 @@ void Ejes::draw(){
 }
 
 Triangulo::Triangulo(GLdouble r){
-
+	radio = r;
 	GLdouble x = r*cos(6.28 / 3);
 	GLdouble y = r *sin(6.28 / 3);
 
@@ -112,6 +114,19 @@ void Triangulo::set( int numero, double altura){
 
 	verticesTri[numero]= { 0, 0, altura };
 }
+
+void Triangulo::rotar(){
+	angulo += _rotar;
+}
+
+void Triangulo::posicionar(GLdouble x, GLdouble y){
+	centro = { x, y, 0 };
+	verticesTri[0] = { radio*cos(angulo) + x, radio * sin(angulo) + y ,0};
+	verticesTri[1] = { radio*cos(angulo + 2 * 3.14 / 3) + x, radio * sin(angulo + 2 * 3.14 / 3) + y, 0};
+	verticesTri[2] = { radio*cos(angulo + 4 * 3.14 / 3) + x, radio * sin(angulo + 4 * 3.14 / 3) + y, 0 };
+
+}
+
 bool Triangulo::dentro(GLdouble w, GLdouble h){
 	/*/SI(Ax - Px) * (By - Py) –(Ay - Py) * (Bx - Px) < 0
 		->P está fuera
@@ -239,7 +254,7 @@ Rectangulo::Rectangulo(GLdouble h, GLdouble w){
 	coordTextura[3].s = 1; coordTextura[3].t = 0;
 
 
-	normal.set(0, 0, 1);
+	normal = { 0, 0, 1 };
 
 }
 
@@ -251,11 +266,12 @@ void Rectangulo::draw(){
 	glNormal3d(normal.x, normal.y, normal.z);
 
 	
-	glColor4d(color.red, color.green, color.blue, color.alpha);
+	
 
-
-	//glLineWidth(2);
 	glTexCoordPointer(2, GL_DOUBLE, 0, coordTextura);
+	//glLineWidth(2);
+	
+	glColor4d(color.red, color.green, color.blue, color.alpha);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 //	glLineWidth(1);
