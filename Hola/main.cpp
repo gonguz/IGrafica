@@ -23,6 +23,8 @@ PuertoVista viewPort(0, 0, winWidth, winHeight);
 Camara camera(winWidth, winHeight);
 
 // Scene variables
+enum Estados{ Collage, Recortar, Animar, Diabolo };
+Estados estado = Recortar;
 Escena escena;
 
 //----------- Callbacks ----------------------------------------------------
@@ -120,8 +122,26 @@ void display(){
   
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
-
-  escena.draw();
+  switch (estado)
+  {
+  case Collage:
+	  break;
+  case Recortar:
+	  glDisable(GL_DEPTH_TEST);
+	  escena.draw();
+	  escena.triangulo.recortar();
+	  break;
+  case Animar:
+	  glDisable(GL_DEPTH_TEST);
+	  escena.tri.draw();
+	  break;
+  case Diabolo:
+	  glEnable(GL_DEPTH_TEST);
+	  escena.drawDiabolo();
+	  break;
+  default:
+	  break;
+  }
 
   glPopMatrix();
   
@@ -176,6 +196,15 @@ void key(unsigned char key, int x, int y){
 	  break;
   case 'z':
 	  glRotated(20.0, 0.0, 0.0, 1.0);
+	  break;
+
+  case '3':
+	  estado = Animar;
+	  break;
+
+
+  case '4':
+	  estado = Diabolo;
 	  break;
 
   default:

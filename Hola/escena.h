@@ -4,7 +4,7 @@
 #include "tipos.h" 
 #include "Textura.h"
 #include <vector>
-enum class Estados{ Collage, Recortar, Animar, Diabolo }; 
+
 using namespace std;
 class CTex2;
 //-------------------------------------------------------------------------
@@ -27,6 +27,7 @@ public:
 	bool dentro(GLdouble w, GLdouble h);
 	void posicionar(GLdouble x, GLdouble y);
 	void rotar();
+	void recortar(GLdouble x, GLdouble y);
 	PVec3 verticesTri[3]; 
 	PVec3 normales[2];
 	Color4 colores[3];

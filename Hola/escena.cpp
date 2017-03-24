@@ -4,14 +4,14 @@
 #include "tipos.h" //Puede estar mal
 using namespace std;
 //-------------------------------------------------------------------------
-Estados estado;
+//Estados estado;
 void Escena::init(){
   // texturas
   // luces
-	estado = Estados::Recortar;
+	//estado = Estados::Recortar;
 	
 	textura->init();
-	textura->load("../bmps/Zelda.bmp");
+	textura->load("../bmps/ray.bmp");
 
 }
 
@@ -149,7 +149,8 @@ bool Triangulo::dentro(GLdouble w, GLdouble h){
 		else return true;
 }
 
-void Triangulo::draw(){/*
+void Triangulo::draw(){
+	/*
 	glEnableClientState(GL_VERTEX_ARRAY);
 	//glEnableClientState(GL_NORMAL_ARRAY);
 	glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
@@ -168,7 +169,7 @@ void Triangulo::draw(){/*
 	glDisableClientState(GL_COLOR_ARRAY);
 	//glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
-	*/if (estado == Estados::Recortar){
+	*/
 		glEnableClientState(GL_VERTEX_ARRAY);
 		//glEnableClientState(GL_NORMAL_ARRAY);
 		glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
@@ -187,8 +188,8 @@ void Triangulo::draw(){/*
 		glDisableClientState(GL_COLOR_ARRAY);
 		//glDisableClientState(GL_NORMAL_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
-	}
-	else {
+	
+	/*else {
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glEnableClientState(GL_TEXTURE_2D);
@@ -201,7 +202,7 @@ void Triangulo::draw(){/*
 
 		//glLineWidth(2);
 		glTexCoordPointer(2, GL_DOUBLE, 0, coordTextura);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
 		//	glLineWidth(1);
 
@@ -211,11 +212,19 @@ void Triangulo::draw(){/*
 		glDisableClientState(GL_TEXTURE_2D);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
-	}
+	}*/
 	
 }
 
 //-------------------------------------------------------------------------
+
+void Triangulo::recortar(int ancho, int alto){
+	//coordTextura = ver 
+	coordTextura[0].s = (verticesTri[0].x + ancho / 2) / ancho;
+	coordTextura[0].t = (verticesTri[0].y + alto / 2) / alto;
+
+	///Continaur
+}
 
 
 
@@ -272,7 +281,7 @@ void Rectangulo::draw(){
 	//glLineWidth(2);
 	
 	glColor4d(color.red, color.green, color.blue, color.alpha);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
 //	glLineWidth(1);
 
