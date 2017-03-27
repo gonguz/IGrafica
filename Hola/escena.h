@@ -36,6 +36,7 @@ public:
 	GLdouble _rotar = 10;
 	PVec3 centro = { 0, 0, 0 };
 	GLdouble radio;
+	bool textura = false;
 
 };
 //piramide variable auxiliar triangulo parametro radio y altura, tiene tres caras el vertice donde confluyen es el 0,0,altura, nos valemos de los vertices(noramles) que hemos
@@ -49,19 +50,18 @@ public:
 	
 };
 
-class triAnimado{
+class triAnimado : public Triangulo{
 public:
 	triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio);
 	 void update();
-	 void const draw();
-	 GLdouble const getRadio(){ return _rad; }
+	 void  draw();
+	 GLdouble const getRadio(){ return radio; }
 private:
-	Triangulo*tri = new Triangulo(50);
+
 	GLdouble _rotaux;
 	GLdouble _giroaux;
 	GLdouble _rot = 0;
 	GLdouble _giro = 0;
-	GLdouble _rad;
 
 };
 
@@ -80,7 +80,7 @@ private:
 
 class Escena {
 public:
-  Escena(): ejes(200) ,tri(20.0,2.0,220.0),triangulo(50),piramide(50.0,_alt){};
+  Escena(): ejes(200) ,tri(20.0,2.0,50.0),triangulo(50),piramide(50.0,_alt){};
   ~Escena();
   void init();
   void draw();

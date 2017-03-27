@@ -122,18 +122,19 @@ void display(){
   
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
+  escena.draw();
   switch (estado)
   {
   case Collage:
 	  break;
   case Recortar:
 	  glDisable(GL_DEPTH_TEST);
-	  escena.draw();
-	  escena.triangulo.recortar();
+
+	 
 	  break;
   case Animar:
 	  glDisable(GL_DEPTH_TEST);
-	  escena.tri.draw();
+	  
 	  break;
   case Diabolo:
 	  glEnable(GL_DEPTH_TEST);
@@ -199,6 +200,8 @@ void key(unsigned char key, int x, int y){
 	  break;
 
   case '3':
+	  escena.tri.recortar(winWidth, winHeight);
+	  escena.tri.textura = true;
 	  estado = Animar;
 	  break;
 
@@ -259,9 +262,9 @@ void mouse(int button, int state, int x, int y){
 void motion(int x, int y){
 	x = x - winWidth / 2;
 	y = -y + winHeight / 2;
-	if (escena.triangulo.dentro(x,y))
+	if (escena.tri.dentro(x,y))
 	{
-		escena.triangulo.posicionar(x, y);
+		escena.tri.posicionar(x, y);
 		glutPostRedisplay();
 	}
 }

@@ -25,12 +25,12 @@ Escena::~Escena(){
 
 void Escena::draw(){
 	
-  //  ejes.draw();
+   ejes.draw();
   //tri.draw();
 	//triangulo.draw();
 	glDisable(GL_DEPTH_TEST);
   rectangulo->draw();
-  triangulo.draw();
+  tri.draw();
   glEnable(GL_DEPTH_TEST);
  // drawDiabolo();
  
@@ -169,7 +169,7 @@ void Triangulo::draw(){
 	glDisableClientState(GL_COLOR_ARRAY);
 	//glDisableClientState(GL_NORMAL_ARRAY);
 	glDisableClientState(GL_VERTEX_ARRAY);
-	*/
+	*/if (!textura){
 		glEnableClientState(GL_VERTEX_ARRAY);
 		//glEnableClientState(GL_NORMAL_ARRAY);
 		glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
@@ -188,8 +188,8 @@ void Triangulo::draw(){
 		glDisableClientState(GL_COLOR_ARRAY);
 		//glDisableClientState(GL_NORMAL_ARRAY);
 		glDisableClientState(GL_VERTEX_ARRAY);
-	
-	/*else {
+	}
+	else {
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
 		glEnableClientState(GL_TEXTURE_2D);
@@ -202,7 +202,7 @@ void Triangulo::draw(){
 
 		//glLineWidth(2);
 		glTexCoordPointer(2, GL_DOUBLE, 0, coordTextura);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
 		//	glLineWidth(1);
 
@@ -212,18 +212,23 @@ void Triangulo::draw(){
 		glDisableClientState(GL_TEXTURE_2D);
 
 		glDisableClientState(GL_VERTEX_ARRAY);
-	}*/
+	}
 	
 }
 
 //-------------------------------------------------------------------------
 
-void Triangulo::recortar(int ancho, int alto){
+void Triangulo::recortar(GLdouble ancho, GLdouble alto){
 	//coordTextura = ver 
-	coordTextura[0].s = (verticesTri[0].x + ancho / 2) / ancho;
-	coordTextura[0].t = (verticesTri[0].y + alto / 2) / alto;
+	coordTextura[0].s = (ancho / 2 + verticesTri[0].x) / ancho;
+	coordTextura[0].t = (alto / 2 + verticesTri[0].y) / alto;
+	coordTextura[1].s = (ancho / 2 + verticesTri[1].x) / ancho;
+	coordTextura[1].t = (alto / 2 + verticesTri[1].y) / alto;
+	coordTextura[2].s = (ancho / 2 + verticesTri[2].x) / ancho;
+	coordTextura[2].t = (alto / 2 + verticesTri[2].y) / alto;
 
-	///Continaur
+
+	
 }
 
 
@@ -343,10 +348,9 @@ void Escena::drawDiabolo(){
 	
 }
 
-triAnimado::triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio){
+triAnimado::triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio):Triangulo(radio){
 	_rotaux = rotacion;
 	_giroaux= giroz;
-	_rad = radio;
 }
 
 void triAnimado::update(){
@@ -354,13 +358,15 @@ void triAnimado::update(){
 	_giro += _giroaux;
 }
 
-void const triAnimado::draw(){
-	GLdouble radio = getRadio();
-	GLdouble x = radio * cos(_giro / 6.28);
-	GLdouble y = radio * sin(_giro / 6.28);
-	glTranslated(x, y, 0);
-	glRotated(triAnimado::_rot, 0.0, 0.0, 1.0);
-	tri->draw();
-	glRotated(-triAnimado::_rot, 0.0, 0.0, 1.0);
-	glTranslated(-x, -y, 0);
+void  triAnimado::draw(){
+	if (!textura)Triangulo::draw();
+	else{
+		GLdouble x = radio * cos(_giro / 6.28);
+		GLdouble y = radio * sin(_giro / 6.28);
+		glTranslated(x, y, 0);
+		glRotated(triAnimado::_rot, 0.0, 0.0, 1.0);
+		Triangulo::draw();
+		glRotated(-triAnimado::_rot, 0.0, 0.0, 1.0);
+		glTranslated(-x, -y, 0);
+	}
 }
