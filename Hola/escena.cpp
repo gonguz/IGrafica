@@ -23,15 +23,35 @@ Escena::~Escena(){
 
 //-------------------------------------------------------------------------
 
-void Escena::draw(){
-	
-   ejes.draw();
+void Escena::draw(int estado){
+	//enum Estados{ Collage = 0, Recortar = 1, Animar = 2, Diabolo = 3};
+	ejes.draw();
+	switch (estado)
+	{
+	case 0:
+		break;
+	case 1:
+		glDisable(GL_DEPTH_TEST);
+		rectangulo->draw();
+		tri.draw();
+		glEnable(GL_DEPTH_TEST);
+
+		break;
+	case 2:
+		
+		//rectangulo->draw();
+		tri.draw();
+		break;
+	case 3:
+		drawDiabolo();
+		break;
+	default:
+		break;
+	}
+  
   //tri.draw();
 	//triangulo.draw();
-	glDisable(GL_DEPTH_TEST);
-  rectangulo->draw();
-  tri.draw();
-  glEnable(GL_DEPTH_TEST);
+   
  // drawDiabolo();
  
 
@@ -202,7 +222,7 @@ void Triangulo::draw(){
 
 		//glLineWidth(2);
 		glTexCoordPointer(2, GL_DOUBLE, 0, coordTextura);
-		glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+		glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 		glDrawArrays(GL_TRIANGLE_STRIP, 0, 3);
 		//	glLineWidth(1);
 

@@ -74,7 +74,7 @@ public:
 private:
 	PVec3 verticesRect[4];
 	CTEx2 coordTextura[4];
-	Color4 color;
+	Color4 color = { 1, 0, 0, 1 };
 	PVec3 normal;
 };
 
@@ -83,7 +83,7 @@ public:
   Escena(): ejes(200) ,tri(20.0,2.0,50.0),triangulo(50),piramide(50.0,_alt){};
   ~Escena();
   void init();
-  void draw();
+  void draw(int x);
   void drawDiabolo();
 
   int _alt = 100;
