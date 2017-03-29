@@ -28,12 +28,13 @@ public:
 	void posicionar(GLdouble x, GLdouble y);
 	void rotar();
 	void recortar(GLdouble x, GLdouble y);
+	void PosyRota();
 	PVec3 verticesTri[3]; 
 	PVec3 normales[2];
 	Color4 colores[3];
 	CTEx2 coordTextura[4];
 	GLdouble angulo = 0;
-	GLdouble _rotar = 10;
+	GLdouble _rotar = 5;
 	PVec3 centro = { 0, 0, 0 };
 	GLdouble radio;
 	bool textura = false;
@@ -80,7 +81,7 @@ private:
 
 class Escena {
 public:
-  Escena(): ejes(200) ,tri(0.0,0.0,50.0),triangulo(50),piramide(50.0,_alt){};
+  Escena(): ejes(200) ,tri(30.0,40.0,50.0),triangulo(50),piramide(50.0,_alt){};
   ~Escena();
   void init();
   void draw(int x);

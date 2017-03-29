@@ -12,7 +12,7 @@
 using namespace std;
 
 //-------------------------------------------------------------------------
-
+bool til = false;
 // Window size
 int winWidth = 800, winHeight = 600;
 
@@ -24,7 +24,7 @@ Camara camera(winWidth, winHeight);
 
 // Scene variables
 enum Estados{ Collage = 0, Recortar = 1, Animar = 2, Diabolo = 3};
-Estados estado = Collage;
+Estados estado = Diabolo;
 Escena escena;
 
 //----------- Callbacks ----------------------------------------------------
@@ -115,6 +115,16 @@ int main(int argc, char *argv[]){
 }
 
 //-------------------------------------------------------------------------
+void tiling(){
+	
+	for (int i = 0; i < 4; i++){
+		for (int e = 0; e < 3; e++){
+			viewPort.set(i*(winWidth / 4), e*(winHeight / 3), winWidth / 4, winHeight / 3);
+			escena.draw(estado);
+		}
+	}
+	viewPort.set(0, 0, 800,600);
+}
 
 void display(){
  
@@ -122,7 +132,8 @@ void display(){
   
   glMatrixMode(GL_MODELVIEW);
   glPushMatrix();
-  escena.draw(estado);
+ if(!til) escena.draw(estado);
+ else tiling();
   glPopMatrix();
   
   glutSwapBuffers();  //glFlush();
@@ -164,8 +175,17 @@ void key(unsigned char key, int x, int y){
   case 'o':
 	  camera.setEZ();
 	  break;
+  case 'm':
+	  if (til)til = false;
+	  else til = true;
+	  break;
+  case 'r':
+	  if (estado == Recortar) {
+		  escena.tri.PosyRota();
+	  }
+	  break;
   case 't':
-	  escena.tri.update();
+	 if(estado==Animar) escena.tri.update();
 	  break;
   case 'x':
 	  glRotated(20.0, 1.0, 0.0, 0.0);
@@ -192,6 +212,7 @@ void key(unsigned char key, int x, int y){
 
 
   case '4':
+	  escena.triangulo.textura = true;
 	  estado = Diabolo;
 	  break;
 

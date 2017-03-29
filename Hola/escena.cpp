@@ -69,14 +69,17 @@ void Escena::draw(int estado){
 
 		break;
 	case 2:
+		textura4->activar();
 		
-		rectangulo->draw();
-		textura->activar();
+		
 		tri.draw();
-		textura->desactivar();
+		textura4->desactivar();
 		break;
 	case 3:
+		cout << "draw";
+		textura4->activar();
 		drawDiabolo();
+		textura4->desactivar();
 		break;
 	default:
 		break;
@@ -178,6 +181,10 @@ void Triangulo::posicionar(GLdouble x, GLdouble y){
 	verticesTri[1] = { radio*cos(angulo + 2 * 3.14 / 3) + x, radio * sin(angulo + 2 * 3.14 / 3) + y, 0};
 	verticesTri[2] = { radio*cos(angulo + 4 * 3.14 / 3) + x, radio * sin(angulo + 4 * 3.14 / 3) + y, 0 };
 
+}
+
+void Triangulo::PosyRota(){
+	rotar(); posicionar(centro.x, centro.y);
 }
 
 bool Triangulo::dentro(GLdouble w, GLdouble h){
@@ -291,11 +298,11 @@ piramideTri::piramideTri(GLdouble r, GLdouble h){
 	// La altura se debe meter tambien para ver donde colocamos la piramide
 
 	triangulos.push_back(new Triangulo(r));
-	triangulos[0]->set(0, h);
+	triangulos[0]->set(0, h); triangulos[0]->textura = true;
 	triangulos.push_back( new Triangulo(r));
-	triangulos[1]->set(1, h);
+	triangulos[1]->set(1, h); triangulos[1]->textura = true;
 	triangulos.push_back(new Triangulo(r));
-	triangulos[2]->set(2, h);
+	triangulos[2]->set(2, h); triangulos[2]->textura = true;
 }
 
 void const piramideTri::draw() {
@@ -409,17 +416,19 @@ triAnimado::triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio):Triang
 void triAnimado::update(){
 	_rot += _rotaux;
 	_giro += _giroaux;
+	cout << _rot << endl;
 }
 
 void  triAnimado::draw(){
 	if (!textura)Triangulo::draw();
 	else{
-		GLdouble x = radio * cos(_giro / 6.28);
-		GLdouble y = radio * sin(_giro / 6.28);
+		GLdouble x = radio * cos(centro.x/ 6.28);
+		GLdouble y = radio * sin(centro.y / 6.28); 
+		rotar(); posicionar(centro.x,centro.y);
 		glTranslated(x, y, 0);
-		glRotated(triAnimado::_rot, 0.0, 0.0, 1.0);
+		glRotated(_rot, 0.0, 0.0, 1.0);
 		Triangulo::draw();
-		glRotated(-triAnimado::_rot, 0.0, 0.0, 1.0);
-		glTranslated(-x, -y, 0);
+	   glRotated(-_rot, 0.0, 0.0, 1.0);
+		//glTranslated(-x, -y, 0);
 	}
 }
