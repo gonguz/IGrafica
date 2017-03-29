@@ -29,6 +29,9 @@ void Escena::draw(int estado){
 	switch (estado)
 	{
 	case 0:
+		glDisable(GL_DEPTH_TEST);
+		glEnable(GL_BLEND);
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		break;
 	case 1:
 		glDisable(GL_DEPTH_TEST);
