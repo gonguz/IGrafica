@@ -80,7 +80,7 @@ private:
 
 class Escena {
 public:
-  Escena(): ejes(200) ,tri(20.0,2.0,50.0),triangulo(50),piramide(50.0,_alt){};
+  Escena(): ejes(200) ,tri(0.0,0.0,50.0),triangulo(50),piramide(50.0,_alt){};
   ~Escena();
   void init();
   void draw(int x);
@@ -96,7 +96,11 @@ public:
   triAnimado tri;// = new triAnimado(10, 10, 100);
   piramideTri piramide;
   Rectangulo *rectangulo = new Rectangulo(600, 800);
+  Rectangulo* rectangulo2 = new Rectangulo(100, 200);
   Textura* textura = new Textura();
+  Textura* textura2 = new Textura();
+  Textura* textura3 = new Textura();
+  Textura* textura4 = new Textura();
 };
 
 

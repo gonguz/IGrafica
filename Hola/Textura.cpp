@@ -24,14 +24,14 @@ bool Textura::load(const std::string & BMP_Name, GLubyte alpha){
 		h = pixMap.height();
 		GLubyte*p = pixMap.create_RGBA(alpha);
 		glBindTexture(GL_TEXTURE_2D, id); // transferir a openGL
-		glTexImage2D(GL_TEXTURE_2D, alpha, GL_RGBA, w, h, alpha, GL_RGBA,
+		glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA,
 			GL_UNSIGNED_BYTE, p);
 		return true;
 	}
 	else return false;
 
 }
-//PixMap24RGB::rgb_color{0,0,0}, 200);
+//, 200);
 bool Textura::load(const std::string & BMP_Name, PixMap24RGB::rgb_color colorKey, GLubyte alpha){
 	// la textura debe estar inicializada -> escena::init()
 	PixMap24RGB pixMap;
@@ -48,10 +48,13 @@ bool Textura::load(const std::string & BMP_Name, PixMap24RGB::rgb_color colorKey
 	else return false;
 
 }
-void Textura::save(const std::string & BMP_Name) {/*
-												  glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, // obtener de openGL
-												  GL_UNSIGNED_BYTE, pA);
-												  // pA-> array donde guardar los datos (de tipo y tamaño adecuado)
-												  //… // y guardar
-												  */
+void Textura::save(const std::string & BMP_Name) {
+	pA.create_pixmap(800, 600);
+	glReadBuffer(GL_FRONT);
+	glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, 800, 600, 0); 
+	glReadBuffer(GL_BACK);
+	glGetTexImage(GL_TEXTURE_2D, 0, GL_RGB, GL_UNSIGNED_BYTE, pA.data());
+	pA.save_bmpBGR(BMP_Name);
 }
+
+												

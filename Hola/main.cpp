@@ -24,7 +24,7 @@ Camara camera(winWidth, winHeight);
 
 // Scene variables
 enum Estados{ Collage = 0, Recortar = 1, Animar = 2, Diabolo = 3};
-Estados estado = Recortar;
+Estados estado = Collage;
 Escena escena;
 
 //----------- Callbacks ----------------------------------------------------
@@ -86,7 +86,7 @@ int main(int argc, char *argv[]){
   // Initialization
   glutInitWindowSize(winWidth, winHeight);
   //glutInitWindowPosition (140, 140);
-  glutInitDisplayMode(GLUT_RGB | GLUT_DOUBLE | GLUT_DEPTH);
+  glutInitDisplayMode(GLUT_RGB | GLUT_RGBA| GLUT_DOUBLE | GLUT_DEPTH);
   glutInit(&argc, argv);
 
   // Window construction
@@ -176,6 +176,12 @@ void key(unsigned char key, int x, int y){
 	  break;
   case 'z':
 	  glRotated(20.0, 0.0, 0.0, 1.0);
+	  break;
+  case '2':
+	  escena.textura4->save("../bmps/paco.bmp");
+	  escena.textura4->init();
+	  escena.textura4->load("../bmps/paco.bmp");
+	  estado = Recortar;
 	  break;
 
   case '3':

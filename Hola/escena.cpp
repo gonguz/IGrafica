@@ -12,7 +12,15 @@ void Escena::init(){
 	
 	textura->init();
 	textura->load("../bmps/ray.bmp");
+	textura->desactivar();
 
+	textura2->init();
+	textura2->load("../bmps/Zelda.bmp",100.0f);
+	textura2->desactivar();
+
+	textura3->init();
+	textura3->load("../bmps/smile.bmp", PixMap24RGB::rgb_color{ 0, 0, 0 },120);
+	textura3->desactivar();
 }
 
 //-------------------------------------------------------------------------
@@ -32,18 +40,40 @@ void Escena::draw(int estado){
 		glDisable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		textura->activar();
+		rectangulo->draw();
+		textura->desactivar();
+
+		textura2->activar();
+		glRotated(-45.0, 0.0, 0.0, 1.0);
+		glTranslated(-140.0, -130.0, 0.0);
+		rectangulo2->draw();
+		glTranslated(140.0, 130.0, 0.0);
+		glRotated(45.0, 0.0, 0.0, -1.0);
+		textura2->desactivar();
+
+		textura3->activar();
+		glTranslated(140.0, 130.0, 0.0);
+		rectangulo2->draw();
+		glTranslated(-140.0, -130.0, 0.0);
+		textura3->desactivar();
+
 		break;
 	case 1:
 		glDisable(GL_DEPTH_TEST);
+		textura4->activar();
 		rectangulo->draw();
 		tri.draw();
+		textura4->desactivar();
 		glEnable(GL_DEPTH_TEST);
 
 		break;
 	case 2:
 		
-		//rectangulo->draw();
+		rectangulo->draw();
+		textura->activar();
 		tri.draw();
+		textura->desactivar();
 		break;
 	case 3:
 		drawDiabolo();
