@@ -198,17 +198,21 @@ void key(unsigned char key, int x, int y){
 	  glRotated(20.0, 0.0, 0.0, 1.0);
 	  break;
   case '2':
-	  escena.textura4->save("../bmps/paco.bmp");
-	  escena.textura4->init();
-	  escena.textura4->load("../bmps/paco.bmp");
-	  estado = Recortar;
+	  if (estado == Collage){
+		  escena.textura4->save("../bmps/paco.bmp");
+		  escena.textura4->init();
+		  escena.textura4->load("../bmps/paco.bmp");
+		  estado = Recortar;
+	  }
 	  break;
 
   case '3':
-	  escena.tri.recortar(winWidth, winHeight);
-	  escena.piramide.texturizar(escena.tri.getCordenadas());
-	  escena.tri.textura = true;
-	  estado = Animar;
+	  if (estado == Recortar){
+		  escena.tri.recortar(winWidth, winHeight);
+		  escena.piramide.texturizar(escena.tri.getCordenadas());
+		  escena.tri.texturatrue();
+		  estado = Animar;
+	  }
 	  break;
 
 

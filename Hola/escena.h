@@ -32,16 +32,28 @@ public:
 	CTEx2 * getCordenadas(){
 		return coordTextura;
 
+
 	}
+	void texturatrue(){ textura = true; }
+	void cambiaCoord(int i, GLdouble cambios, GLdouble cambiot){
+		coordTextura[i].s = cambios;
+		coordTextura[i].t = cambiot;
+
+	}
+	
+	
+protected:
+	CTEx2 coordTextura[4];
+	bool textura = false;
 	PVec3 verticesTri[3]; 
 	PVec3 normales[2];
 	Color4 colores[3];
-	CTEx2 coordTextura[4];
+	
 	GLdouble angulo = 0;
 	GLdouble _rotar = 5;
 	PVec3 centro = { 0, 0, 0 };
 	GLdouble radio;
-	bool textura = false;
+	
 
 };
 //piramide variable auxiliar triangulo parametro radio y altura, tiene tres caras el vertice donde confluyen es el 0,0,altura, nos valemos de los vertices(noramles) que hemos
@@ -53,8 +65,10 @@ class piramideTri {
 public: 
 	piramideTri(GLdouble r, GLdouble h);
 	void texturizar(CTEx2 *coordTextur);
-	vector <Triangulo*> triangulos;
+	
 	void const draw();
+protected:
+	vector <Triangulo*> triangulos;
 	
 };
 

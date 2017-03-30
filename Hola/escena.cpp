@@ -294,23 +294,27 @@ piramideTri::piramideTri(GLdouble r, GLdouble h){
 	// La altura se debe meter tambien para ver donde colocamos la piramide
 	
 	triangulos.push_back(new Triangulo(r));
-	triangulos[0]->set(0, h); triangulos[0]->textura = true; 
+	triangulos[0]->set(0, h); triangulos[0]->texturatrue();
 	triangulos.push_back( new Triangulo(r));
-	triangulos[1]->set(1, h); triangulos[1]->textura = true; 
+	triangulos[1]->set(1, h); triangulos[1]->texturatrue();
 	triangulos.push_back(new Triangulo(r));
-	triangulos[2]->set(2, h); triangulos[2]->textura = true; 
-	
+	triangulos[2]->set(2, h); triangulos[2]->texturatrue();
 }
 void piramideTri::texturizar(CTEx2 *coordTextur){
 	CTEx2*aux = coordTextur;
 
 	for (int i = 0; i < 3; i++) {
-		triangulos[i]->coordTextura[0].s = aux[0].s;
+		
+		triangulos[i]->cambiaCoord(0, aux[0].s, aux[0].t);
+		triangulos[i]->cambiaCoord(1, aux[1].s, aux[1].t);
+		triangulos[i]->cambiaCoord(2, aux[2].s, aux[2].t);
+		/*triangulos[i]->coordTextura[0].s = aux[0].s;
 		triangulos[i]->coordTextura[0].t = aux[0].t;
 		triangulos[i]->coordTextura[1].s = aux[1].s;
 		triangulos[i]->coordTextura[1].t = aux[1].t;
 		triangulos[i]->coordTextura[2].s = aux[2].s;
 		triangulos[i]->coordTextura[2].t = aux[2].t;
+		*/
 	}
 }
 
