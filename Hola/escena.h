@@ -29,6 +29,10 @@ public:
 	void rotar();
 	void recortar(GLdouble x, GLdouble y);
 	void PosyRota();
+	CTEx2 * getCordenadas(){
+		return coordTextura;
+
+	}
 	PVec3 verticesTri[3]; 
 	PVec3 normales[2];
 	Color4 colores[3];
@@ -48,6 +52,7 @@ class piramideTri {
 	GLdouble altura;
 public: 
 	piramideTri(GLdouble r, GLdouble h);
+	void texturizar(CTEx2 *coordTextur);
 	vector <Triangulo*> triangulos;
 	void const draw();
 	
