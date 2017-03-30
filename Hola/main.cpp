@@ -24,7 +24,7 @@ Camara camera(winWidth, winHeight);
 
 // Scene variables
 enum Estados{ Collage = 0, Recortar = 1, Animar = 2, Diabolo = 3};
-Estados estado = Diabolo;
+Estados estado = Collage;
 Escena escena;
 
 //----------- Callbacks ----------------------------------------------------
@@ -212,7 +212,7 @@ void key(unsigned char key, int x, int y){
 
 
   case '4':
-	  escena.triangulo.textura = true;
+	  
 	  estado = Diabolo;
 	  break;
 

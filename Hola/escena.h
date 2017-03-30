@@ -45,6 +45,7 @@ public:
 
 class piramideTri {
 	vector<Triangulo*> triangulos;
+	GLdouble altura;
 public: 
 	piramideTri(GLdouble r, GLdouble h);
 	void const draw();
@@ -82,7 +83,20 @@ private:
 class Escena {
 public:
   Escena(): ejes(200) ,tri(30.0,40.0,50.0),triangulo(50),piramide(50.0,_alt){};
-  ~Escena();
+  ~Escena(){
+	  delete rectangulo;
+	  rectangulo = nullptr;
+	  delete rectangulo2;
+	  rectangulo2 = nullptr;
+	  delete textura;
+	  textura = nullptr;
+	  delete textura2;
+	  textura2 = nullptr;
+	  delete textura3;
+	  textura3 = nullptr;
+	  delete textura4;
+	  textura4 = nullptr;
+  }
   void init();
   void draw(int x);
   void drawDiabolo();

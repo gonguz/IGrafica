@@ -25,9 +25,6 @@ void Escena::init(){
 
 //-------------------------------------------------------------------------
 
-Escena::~Escena(){
-   // liberar memoria y recursos 
-}
 
 //-------------------------------------------------------------------------
 
@@ -252,7 +249,7 @@ void Triangulo::draw(){
 	else {
 		glEnableClientState(GL_VERTEX_ARRAY);
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-		glEnableClientState(GL_TEXTURE_2D);
+		
 		glVertexPointer(3, GL_DOUBLE, 0, verticesTri);
 		glNormal3d(normales[0].x, normales[0].y, normales[0].z);
 
@@ -269,8 +266,7 @@ void Triangulo::draw(){
 
 
 		glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-		glDisableClientState(GL_TEXTURE_2D);
-
+		
 		glDisableClientState(GL_VERTEX_ARRAY);
 	}
 	
@@ -298,15 +294,15 @@ piramideTri::piramideTri(GLdouble r, GLdouble h){
 	// La altura se debe meter tambien para ver donde colocamos la piramide
 
 	triangulos.push_back(new Triangulo(r));
-	triangulos[0]->set(0, h); triangulos[0]->textura = true;
+	triangulos[0]->set(0, h); triangulos[0]->textura = true; triangulos[0]->recortar(800, 600);
 	triangulos.push_back( new Triangulo(r));
-	triangulos[1]->set(1, h); triangulos[1]->textura = true;
+	triangulos[1]->set(1, h); triangulos[1]->textura = true; triangulos[1]->recortar(800, 600);
 	triangulos.push_back(new Triangulo(r));
-	triangulos[2]->set(2, h); triangulos[2]->textura = true;
+	triangulos[2]->set(2, h); triangulos[2]->textura = true; triangulos[2]->recortar(800, 600);
 }
 
 void const piramideTri::draw() {
-	for (int i = 2; i >= 0; i--) {
+	for (int i = 0; i < 3; i++) {
 		triangulos[i]->draw();
 	}
 }
@@ -335,7 +331,7 @@ Rectangulo::Rectangulo(GLdouble h, GLdouble w){
 void Rectangulo::draw(){
 	glEnableClientState(GL_VERTEX_ARRAY);
 	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
-	glEnableClientState(GL_TEXTURE_2D);
+	
 	glVertexPointer(3, GL_DOUBLE, 0, verticesRect);
 	glNormal3d(normal.x, normal.y, normal.z);
 
@@ -353,7 +349,7 @@ void Rectangulo::draw(){
 
 
 	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-	glDisableClientState(GL_TEXTURE_2D);
+	
 
 	glDisableClientState(GL_VERTEX_ARRAY);
 }
