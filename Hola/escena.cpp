@@ -292,15 +292,18 @@ void Triangulo::recortar(GLdouble ancho, GLdouble alto){
 piramideTri::piramideTri(GLdouble r, GLdouble h){
 	//Aqui rellenas el vector de tangulos en los cuales vas cambiando las coordenadas de una esquinaç
 	// La altura se debe meter tambien para ver donde colocamos la piramide
-
+	
 	triangulos.push_back(new Triangulo(r));
-	triangulos[0]->set(0, h); triangulos[0]->textura = true; triangulos[0]->recortar(800, 600);
+	triangulos[0]->set(0, h); triangulos[0]->textura = true; 
 	triangulos.push_back( new Triangulo(r));
-	triangulos[1]->set(1, h); triangulos[1]->textura = true; triangulos[1]->recortar(800, 600);
+	triangulos[1]->set(1, h); triangulos[1]->textura = true; 
 	triangulos.push_back(new Triangulo(r));
-	triangulos[2]->set(2, h); triangulos[2]->textura = true; triangulos[2]->recortar(800, 600);
+	triangulos[2]->set(2, h); triangulos[2]->textura = true; 
+	
 }
+piramideTri::piramideTri(CTEx2 coordTextura[4]){
 
+}
 void const piramideTri::draw() {
 	for (int i = 0; i < 3; i++) {
 		triangulos[i]->draw();

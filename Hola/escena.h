@@ -44,10 +44,11 @@ public:
 //usado en el triangulo
 
 class piramideTri {
-	vector<Triangulo*> triangulos;
+	
 	GLdouble altura;
 public: 
 	piramideTri(GLdouble r, GLdouble h);
+	vector <Triangulo*> triangulos;
 	void const draw();
 	
 };
@@ -82,7 +83,7 @@ private:
 
 class Escena {
 public:
-  Escena(): ejes(200) ,tri(30.0,40.0,50.0),triangulo(50),piramide(50.0,_alt){};
+	Escena() : ejes(200), tri(30.0, 40.0, 50.0), triangulo(50), piramide(50.0, _alt){};
   ~Escena(){
 	  delete rectangulo;
 	  rectangulo = nullptr;
@@ -101,7 +102,10 @@ public:
   void draw(int x);
   void drawDiabolo();
 
-  int _alt = 100;
+  int _alt = 100; 
+  triAnimado getTri(){
+	  return tri;
+  }
   int altura(){ return _alt; };
   
 public:

@@ -206,6 +206,7 @@ void key(unsigned char key, int x, int y){
 
   case '3':
 	  escena.tri.recortar(winWidth, winHeight);
+
 	  escena.tri.textura = true;
 	  estado = Animar;
 	  break;
