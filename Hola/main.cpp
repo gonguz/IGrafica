@@ -176,8 +176,10 @@ void key(unsigned char key, int x, int y){
 	  camera.setEZ();
 	  break;
   case 'm':
-	  if (til)til = false;
-	  else til = true;
+	  if (estado == Diabolo){
+		  if (til)til = false;
+		  else til = true;
+	  }
 	  break;
   case 'r':
 	  if (estado == Recortar) {
