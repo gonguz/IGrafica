@@ -64,6 +64,16 @@ class piramideTri {
 	GLdouble altura;
 public: 
 	piramideTri(GLdouble r, GLdouble h);
+	~piramideTri(){
+		delete triangulos[0];
+		triangulos[0] = nullptr;
+
+		delete triangulos[1];
+		triangulos[1] = nullptr;
+
+		delete triangulos[2];
+		triangulos[2] = nullptr;
+	}
 	void texturizar(CTEx2 *coordTextur);
 	
 	void const draw();
