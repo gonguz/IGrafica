@@ -110,9 +110,20 @@ private:
 	PVec3 normal;
 };
 
+class Cubo {
+public:
+	Cubo(GLint lado);
+	~Cubo() {};
+
+	void draw();
+
+	PVec3 vertices[8];
+	PVec3 normal[1];
+};
+
 class Escena {
 public:
-	Escena() : ejes(200), tri(30.0, 40.0, 50.0), triangulo(50), piramide(50.0, _alt){};
+	Escena() : ejes(200), tri(30.0, 40.0, 50.0), cubo(50),  triangulo(50), piramide(50.0, _alt){};
   ~Escena(){
 	  delete rectangulo;
 	  rectangulo = nullptr;
@@ -130,6 +141,7 @@ public:
   void init();
   void draw(int x);
   void drawDiabolo();
+  void dibujaCubo(GLdouble lado);
 
   int _alt = 100; 
   triAnimado getTri(){
@@ -143,6 +155,7 @@ public:
   Triangulo triangulo;
   triAnimado tri;// = new triAnimado(10, 10, 100);
   piramideTri piramide;
+  Cubo cubo;
   Rectangulo *rectangulo = new Rectangulo(600, 800);
   Rectangulo* rectangulo2 = new Rectangulo(100, 200);
   Textura* textura = new Textura();

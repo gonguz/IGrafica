@@ -34,7 +34,10 @@ void Escena::draw(int estado){
 	switch (estado)
 	{
 	case 0:
-		glDisable(GL_DEPTH_TEST);
+
+		//cubo.draw();
+		dibujaCubo(100);
+		/*glDisable(GL_DEPTH_TEST);
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		textura->activar();
@@ -53,7 +56,7 @@ void Escena::draw(int estado){
 		glTranslated(140.0, 130.0, 0.0);
 		rectangulo2->draw();
 		glTranslated(-140.0, -130.0, 0.0);
-		textura3->desactivar();
+		textura3->desactivar();*/
 
 		break;
 	case 1:
@@ -422,6 +425,41 @@ void Escena::drawDiabolo(){
 	
 }
 
+void Escena::dibujaCubo(GLdouble lado) {
+	Rectangulo *r1 = new Rectangulo(lado, lado);
+
+	glTranslated(0.0, 0.0, lado / 2);
+	r1->draw();
+	glTranslated(0.0, 0.0, -lado / 2);
+	glTranslated(0.0, 0.0, -lado / 2);
+	r1->draw();
+	glTranslated(0.0, 0.0, lado / 2);
+
+	glTranslated(-lado / 2, 0, 0);
+	glRotated(90.0, 0.0, 1.0, 0.0);
+	r1->draw();
+	glRotated(-90.0, 0.0, 1.0, 0.0);
+	glTranslated(lado / 2, 0, 0);
+
+	glTranslated(lado / 2, 0, 0);
+	glRotated(90.0, 0.0, 1.0, 0.0);
+	r1->draw();
+	glRotated(-90.0, 0.0, 1.0, 0.0);
+	glTranslated(-lado / 2, 0, 0);
+
+	glTranslated(0, lado / 2, 0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	r1->draw();
+	glRotated(-90.0, 1.0, 0.0, 0.0);
+	glTranslated(0, -lado / 2, 0);
+
+	glTranslated(0, -lado / 2, 0);
+	glRotated(90.0, 1.0, 0.0, 0.0);
+	r1->draw();
+	glRotated(-90.0, 1.0, 0.0, 0.0);
+	glTranslated(0, lado / 2, 0);
+}
+
 triAnimado::triAnimado(GLdouble rotacion, GLdouble giroz, GLdouble radio):Triangulo(radio){
 	_rotaux = rotacion;
 	_giroaux= giroz;
@@ -445,4 +483,33 @@ void  triAnimado::draw(){
 	   glRotated(-_rot, 0.0, 0.0, 1.0);
 		//glTranslated(-x, -y, 0);
 	}
+}
+
+Cubo::Cubo(GLint lado) {
+	vertices[0].set(-lado / 2, lado / 2, lado / 2);
+	vertices[1].set(-lado / 2, -lado / 2, lado / 2);
+	vertices[2].set(-lado / 2, lado / 2, -lado / 2);
+	vertices[3].set(-lado / 2, -lado / 2, -lado / 2);
+	vertices[4].set(lado / 2, lado / 2, -lado / 2);
+	vertices[5].set(lado / 2, -lado / 2, -lado / 2);
+	vertices[6].set(lado / 2, lado / 2, lado / 2);
+	vertices[7].set(lado / 2, -lado / 2, lado / 2);
+
+	normal[0].set(0, 0, 1);
+}
+
+void Cubo::draw() {
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glColor4d(1, 0, 0, 1);
+	glVertexPointer(3, GL_DOUBLE, 0, vertices);
+	glNormal3d(normal[0].x, normal[0].y, normal[0].z);
+
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
+	glRotated(180.0, 1.0, 0.0, 0.0);
+	glRotated(90.0, 0.0, 0.0, 1.0);
+	glDrawArrays(GL_TRIANGLE_STRIP, 0, 8);
+
+	glDisableClientState(GL_VERTEX_ARRAY);
 }
